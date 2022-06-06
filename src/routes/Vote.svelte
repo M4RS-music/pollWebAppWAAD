@@ -7,8 +7,10 @@
   }
 
   async function vote(id) {
+    //Use patch to increment the amount of votes for a given answer
+    //Bound to each button in <main> (showing answers) so that when the users clicks on one the vote is cast
     try{
-      const url = '/api/poll/asnwer' + id;
+      const url = '/api/poll/answer' + id;
       const response = await fetch(url, {method: 'PATCH'});
       const isJson = response.headers.get('content-type')?.includes('application/json');
       const data = isJson ? await response.json() : null;
@@ -28,6 +30,7 @@
 
 
   async function fetchData() {
+    //Use get route to get data for displaying the voting page
     const url = '/api/poll/' + params.id;
     const response = await fetch(url);
     const isJson = response.headers.get('content-type')?.includes('application/json');

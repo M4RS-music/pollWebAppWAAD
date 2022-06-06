@@ -1,15 +1,15 @@
 DROP TABLE IF EXISTS questions;
-CREATE TABE questions(
+CREATE TABLE questions(
   id SERIAL PRIMARY KEY,
   question VARCHAR NOT NULL
 );
 
 DROP TABLE IF EXISTS answers;
-CREATE TABE answers(
+CREATE TABLE answers(
   id SERIAL PRIMARY KEY,
   question_id INT NOT NULL,
   answer VARCHAR NOT NULL,
-  vot INT DEFAULT 0 NOT NULL
+  vote INT DEFAULT 0 NOT NULL
 );
 
 INSERT INTO questions (question) VALUES

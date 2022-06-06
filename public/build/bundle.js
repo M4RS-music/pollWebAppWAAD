@@ -2121,7 +2121,7 @@ var app = (function () {
     	return child_ctx;
     }
 
-    // (56:2) {:catch error}
+    // (59:2) {:catch error}
     function create_catch_block$1(ctx) {
     	let h1;
     	let t_value = /*error*/ ctx[8] + "";
@@ -2131,7 +2131,7 @@ var app = (function () {
     		c: function create() {
     			h1 = element("h1");
     			t = text(t_value);
-    			add_location(h1, file$2, 56, 4, 1462);
+    			add_location(h1, file$2, 59, 4, 1702);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h1, anchor);
@@ -2147,14 +2147,14 @@ var app = (function () {
     		block,
     		id: create_catch_block$1.name,
     		type: "catch",
-    		source: "(56:2) {:catch error}",
+    		source: "(59:2) {:catch error}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (50:2) {:then poll}
+    // (53:2) {:then poll}
     function create_then_block$1(ctx) {
     	let h1;
     	let t0_value = /*poll*/ ctx[4].question + "";
@@ -2185,9 +2185,9 @@ var app = (function () {
     			}
 
     			each_1_anchor = empty();
-    			add_location(h1, file$2, 50, 4, 1263);
+    			add_location(h1, file$2, 53, 4, 1503);
     			attr_dev(div, "class", "label");
-    			add_location(div, file$2, 51, 4, 1292);
+    			add_location(div, file$2, 54, 4, 1532);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h1, anchor);
@@ -2241,14 +2241,14 @@ var app = (function () {
     		block,
     		id: create_then_block$1.name,
     		type: "then",
-    		source: "(50:2) {:then poll}",
+    		source: "(53:2) {:then poll}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (53:4) {#each poll.answers as ans}
+    // (56:4) {#each poll.answers as ans}
     function create_each_block$1(ctx) {
     	let button;
     	let t_value = /*ans*/ ctx[5].answer + "";
@@ -2264,7 +2264,7 @@ var app = (function () {
     		c: function create() {
     			button = element("button");
     			t = text(t_value);
-    			add_location(button, file$2, 53, 6, 1369);
+    			add_location(button, file$2, 56, 6, 1609);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, button, anchor);
@@ -2289,14 +2289,14 @@ var app = (function () {
     		block,
     		id: create_each_block$1.name,
     		type: "each",
-    		source: "(53:4) {#each poll.answers as ans}",
+    		source: "(56:4) {#each poll.answers as ans}",
     		ctx
     	});
 
     	return block;
     }
 
-    // (48:22)      <h1>Loading</h1>   {:then poll}
+    // (51:22)      <h1>Loading</h1>   {:then poll}
     function create_pending_block$1(ctx) {
     	let h1;
 
@@ -2304,7 +2304,7 @@ var app = (function () {
     		c: function create() {
     			h1 = element("h1");
     			h1.textContent = "Loading";
-    			add_location(h1, file$2, 48, 4, 1227);
+    			add_location(h1, file$2, 51, 4, 1467);
     		},
     		m: function mount(target, anchor) {
     			insert_dev(target, h1, anchor);
@@ -2319,7 +2319,7 @@ var app = (function () {
     		block,
     		id: create_pending_block$1.name,
     		type: "pending",
-    		source: "(48:22)      <h1>Loading</h1>   {:then poll}",
+    		source: "(51:22)      <h1>Loading</h1>   {:then poll}",
     		ctx
     	});
 
@@ -2347,7 +2347,7 @@ var app = (function () {
     		c: function create() {
     			main = element("main");
     			info.block.c();
-    			add_location(main, file$2, 46, 0, 1193);
+    			add_location(main, file$2, 49, 0, 1433);
     		},
     		l: function claim(nodes) {
     			throw new Error_1$1("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -2393,8 +2393,10 @@ var app = (function () {
     	}
 
     	async function vote(id) {
+    		//Use patch to increment the amount of votes for a given answer
+    		//Bound to each button in <main> (showing answers) so that when the users clicks on one the vote is cast
     		try {
-    			const url = '/api/poll/asnwer' + id;
+    			const url = '/api/poll/answer' + id;
     			const response = await fetch(url, { method: 'PATCH' });
     			const isJson = response.headers.get('content-type')?.includes('application/json');
     			const data = isJson ? await response.json() : null;
@@ -2412,7 +2414,9 @@ var app = (function () {
     	}
 
     	async function fetchData() {
+    		//Use get route to get data for displaying the voting page
     		const url = '/api/poll/' + params.id;
+
     		const response = await fetch(url);
     		const isJson = response.headers.get('content-type')?.includes('application/json');
     		const data = isJson ? await response.json() : null;
@@ -2923,7 +2927,7 @@ var app = (function () {
     		c: function create() {
     			main = element("main");
     			create_component(router.$$.fragment);
-    			add_location(main, file, 13, 0, 286);
+    			add_location(main, file, 13, 0, 390);
     		},
     		l: function claim(nodes) {
     			throw new Error("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -2965,6 +2969,7 @@ var app = (function () {
     	validate_slots('App', slots, []);
 
     	const routes = {
+    		//Assign "urls" too all these routes
     		'/': Home,
     		'/vote/:id': Vote,
     		'/result/:id': Result
